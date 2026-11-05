@@ -1,0 +1,33 @@
+/*
+ * Word highlight colours. Each one mixes GitHub's own word colour with its
+ * strong red / green, so the changed words stand out clearly from the line
+ * background in light, dark and high-contrast themes. Change these two
+ * variables to restyle.
+ */
+:root {
+  --gh-word-diff-del-bg: color-mix(in srgb,
+      var(--diffBlob-deletionWord-bgColor, #ffcecb) 45%,
+      var(--fgColor-danger, #d1242f));
+  --gh-word-diff-add-bg: color-mix(in srgb,
+      var(--diffBlob-additionWord-bgColor, #aceebb) 45%,
+      var(--fgColor-success, #1a7f37));
+}
+
+::highlight(gh-word-diff-del) {
+  background-color: var(--gh-word-diff-del-bg);
+}
+
+::highlight(gh-word-diff-add) {
+  background-color: var(--gh-word-diff-add-bg);
+}
+
+/*
+ * Hide GitHub's own word highlights (.x). The extension re-computes every
+ * changed pair, so its highlights replace GitHub's everywhere.
+ */
+.diff-text-cell .syntax-highlighted-line.addition .x,
+.diff-text-cell .syntax-highlighted-line.deletion .x,
+.blob-code-addition .x,
+.blob-code-deletion .x {
+  background-color: transparent !important;
+}
